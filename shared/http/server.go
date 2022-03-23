@@ -1,7 +1,9 @@
 package http
 
 import (
+	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/SergioVenicio/url_shorter/useCases/url/controllers"
 	"github.com/gorilla/mux"
@@ -15,5 +17,7 @@ func RunServer() {
 	router.HandleFunc("/url/{id}", controllers.GetUrl).Methods("GET")
 	router.HandleFunc("/{url}", controllers.Redirect).Methods("GET")
 
-	http.ListenAndServe(":5000", router)
+	server := fmt.Sprintf("%s:%s", os.Getenv("HOST"), os.Getenv("PORT"))
+	fmt.Println("Running server on", server)
+	http.ListenAndServe(server, router)
 }
