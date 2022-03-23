@@ -37,6 +37,10 @@ func intToString(numbers []int) string {
 	return buffer.String()
 }
 
+func (u Url) GetId() string {
+	return u.Id
+}
+
 func (u *Url) SetShorted() error {
 	if u.Url == "" {
 		return errors.New("url field is required!")
